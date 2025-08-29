@@ -2,22 +2,20 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Urutan penting:
+        // 1) pastikan permission CRUD terbentuk dari semua Model AutoCrud
+        $this->call(AutoCrudPermissionsSeeder::class);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // 2) mapping permission ke roles (admin=all, user=read-only)
+        $this->call(RolesAndPermissionsSeeder::class);
+
+        // 3) bikin users dan assign role
+        $this->call(UsersSeeder::class);
     }
 }
