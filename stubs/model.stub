@@ -1,0 +1,20 @@
+<?php
+
+namespace {{ namespace }};
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use App\Models\Concerns\AutoCrud;
+
+class {{ class }} extends Model
+{
+    use HasFactory, AutoCrud;
+
+    protected $guarded = [];
+
+    // Jika pakai soft deletes:
+    // use \Illuminate\Database\Eloquent\SoftDeletes;
+    // public static function crudOptions(): array {
+    //     return ['softDeletes' => true];
+    // }
+}
